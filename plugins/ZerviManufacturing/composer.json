@@ -1,0 +1,31 @@
+{
+    "name": "zervi/manufacturing",
+    "description": "Manufacturing Execution System (MES) for tent production with supervisor-focused Kanban workflow",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Zervi Manufacturing Team",
+            "email": "manufacturing@zervi.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "filament/filament": "^3.0",
+        "laravel/framework": "^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Zervi\\Manufacturing\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Zervi\\Manufacturing\\Providers\\ZerviManufacturingServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
