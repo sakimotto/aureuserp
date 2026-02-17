@@ -12,8 +12,8 @@ return new class extends Migration
             $table->id();
             
             // Core relationships
-            $table->foreignId('work_order_id')->constrained('zervi_work_orders')->cascadeOnDelete();
-            $table->foreignId('assigned_employee_id')->nullable()->constrained('employees');
+            $table->unsignedBigInteger('work_order_id');
+            $table->unsignedBigInteger('assigned_employee_id')->nullable();
             
             // Task information
             $table->string('operation_name'); // "Cut Foam Base", "Apply PUR Adhesive"
@@ -21,7 +21,7 @@ return new class extends Migration
             
             // Workflow sequencing
             $table->integer('sequence_order')->default(0);
-            $table->foreignId('predecessor_task_id')->nullable()->constrained('zervi_work_order_tasks');
+            $table->unsignedBigInteger('predecessor_task_id')->nullable();
             
             // Time tracking
             $table->decimal('estimated_hours', 8, 2);
@@ -41,11 +41,11 @@ return new class extends Migration
             ])->nullable();
             $table->text('block_notes')->nullable();
             $table->timestamp('blocked_at')->nullable();
-            $table->foreignId('blocked_by')->nullable()->constrained('users');
+            $table->unsignedBigInteger('blocked_by')->nullable();
             
             // Quality requirements
             $table->boolean('requires_qc')->default(false);
-            $table->foreignId('qc_record_id')->nullable()->constrained('zervi_quality_records');
+            $table->unsignedBigInteger('qc_record_id')->nullable();
             
             // Work instructions and attachments
             $table->text('work_instructions')->nullable();

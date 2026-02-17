@@ -12,10 +12,10 @@ return new class extends Migration
             $table->id();
             
             // Core relationships
-            $table->foreignId('work_order_id')->constrained('zervi_work_orders');
-            $table->foreignId('task_id')->nullable()->constrained('zervi_work_order_tasks');
-            $table->foreignId('product_id')->constrained('products');
-            $table->foreignId('inspected_by')->constrained('employees');
+            $table->unsignedBigInteger('work_order_id');
+            $table->unsignedBigInteger('task_id')->nullable();
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('inspected_by');
             
             // Inspection details
             $table->string('qc_number')->unique(); // QC-2024-00001
@@ -37,7 +37,7 @@ return new class extends Migration
             
             // Resolution tracking
             $table->timestamp('resolved_at')->nullable();
-            $table->foreignId('resolved_by')->nullable()->constrained('users');
+            $table->unsignedBigInteger('resolved_by')->nullable();
             $table->text('resolution_notes')->nullable();
             $table->enum('resolution_action', [
                 'rework_completed', 'scrap_approved', 'use_as_is_approved', 'returned_to_vendor'

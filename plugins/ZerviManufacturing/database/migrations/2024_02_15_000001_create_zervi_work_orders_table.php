@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('barcode')->unique();
             
             // Product and quantity tracking
-            $table->foreignId('product_id')->constrained('products');
+            $table->unsignedBigInteger('product_id')->nullable(); // Will be linked later
             $table->integer('quantity_requested');
             $table->integer('quantity_completed')->default(0);
             $table->integer('quantity_scrap')->default(0);
@@ -41,13 +41,13 @@ return new class extends Migration
             $table->timestamp('actual_end')->nullable();
             
             // Customer commitment tracking (for supervisor context)
-            $table->foreignId('sales_order_line_id')->nullable()->constrained(); // Link to Aureus sales
+            $table->unsignedBigInteger('sales_order_line_id')->nullable(); // Link to Aureus sales
             $table->date('promised_delivery_date')->nullable();
             $table->string('customer_po_number')->nullable();
             
             // Department assignment for supervisor scoping
-            $table->foreignId('owning_department_id')->nullable()->constrained('employees_departments');
-            $table->foreignId('assigned_to')->nullable()->constrained('employees'); // Supervisor
+            $table->unsignedBigInteger('owning_department_id')->nullable(); // Will be linked later
+            $table->unsignedBigInteger('assigned_to')->nullable(); // Supervisor - will be linked later
             
             // Cost tracking
             $table->decimal('estimated_material_cost', 12, 2)->default(0);
