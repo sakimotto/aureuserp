@@ -59,7 +59,7 @@ return new class extends Migration
             $table->string('lot_number')->nullable();
             
             // Tracking and audit
-            $table->foreignId('created_by')->constrained('users');
+            $table->unsignedBigInteger('created_by');
             $table->timestamps();
             $table->softDeletes();
             
